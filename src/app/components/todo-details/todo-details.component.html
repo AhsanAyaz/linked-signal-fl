@@ -1,1 +1,18 @@
-<p>todo-details works!</p>
+<article class="card bg-base-200 max-w-md w-full mx-auto shadow-xl">
+  <div class="card-body">
+    <h2 class="card-title">Title: {{ post().title }}</h2>
+    <p>Body: {{ post().body }}</p>
+    <ul class="menu menu-vertical rounded-box mt-10">
+      <h4 class="text-center text-lg">Comments</h4>
+      @if (loadingComments()) {
+      <span
+        class="loading loading-spinner loading-md mt-10 mx-auto block"
+      ></span>
+      } @else { @for (comment of comments(); track $index) {
+      <li class="menu-item">
+        <a>{{ comment.body }}</a>
+      </li>
+      } }
+    </ul>
+  </div>
+</article>

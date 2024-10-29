@@ -1,7 +1,13 @@
-<section class="h-full flex-grow min-h-full">
+<ul class="menu w-full rounded-box">
   @if (posts()) { @for (post of posts(); track $index) {
-  <div>
-    <h2>{{ post.title }}</h2>
-  </div>
+  <li (click)="selectPost(post)">
+    <a
+      [ngClass]="{
+        'bg-primary text-primary-content hover:bg-primary hover:text-primary-content':
+          post.id === selectedPost()?.id
+      }"
+      >{{ post.title }}</a
+    >
+  </li>
   } }
-</section>
+</ul>

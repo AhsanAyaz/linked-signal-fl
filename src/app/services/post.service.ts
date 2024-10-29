@@ -8,6 +8,14 @@ export type Post = {
   body: string;
 };
 
+export type Comment = {
+  postId: string;
+  id: string;
+  name: string;
+  email: string;
+  body: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,11 +23,15 @@ export class PostService {
   http = inject(HttpClient);
   baseUrl = 'https://jsonplaceholder.typicode.com';
 
-  getPosts() {
-    return this.http.get<Post[]>(`${this.baseUrl}/posts`);
+  getPosts(userId: number) {
+    return this.http.get<Post[]>(`${this.baseUrl}/users/${userId}/posts`);
   }
 
   getPost(id: number) {
     return this.http.get<Post>(`${this.baseUrl}/posts/${id}`);
+  }
+
+  getPostComments(postId: number) {
+    return this.http.get<Comment[]>(`${this.baseUrl}/posts/${postId}/comments`);
   }
 }
